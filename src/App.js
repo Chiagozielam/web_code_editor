@@ -8,16 +8,17 @@ function App() {
   const [cssEditorIsOpen, setCssEditorIsOpen] = useState(false);
   const [jsEditorIsOpen, setJsEditorIsOpen] = useState(false);
 
+  const [openedEditor, setOpenedEditor] = useState('html');
+
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');
   const [js, setJs] = useState('');
   const [srcDoc, setSrcDoc] = useState(``);
 
-  const onTabClick = (currentState, firstOtherState, secondOtherState) => {
-    currentState(true);
-    firstOtherState(false);
-    secondOtherState(false);
-  }
+
+  const onTabClick = (editorName) => {
+    setOpenedEditor(editorName);
+  };
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -40,25 +41,25 @@ function App() {
       <p>Welcome to the edior</p>
       <div className="tab-button-container">
         <Button title="HTML" onClick={() => {
-          onTabClick(setHtmlEditorIsOpen, setCssEditorIsOpen, setJsEditorIsOpen)
+          onTabClick('html')
         }} />
         <Button title="CSS" onClick={() => {
-          onTabClick(setCssEditorIsOpen, setHtmlEditorIsOpen, setJsEditorIsOpen)
+          onTabClick('css')
         }} />
         <Button title="JavaScript" onClick={() => {
-          onTabClick(setJsEditorIsOpen, setCssEditorIsOpen, setHtmlEditorIsOpen)
+          onTabClick('js')
         }} />
       </div>
       <div className="editor-container">
         {
-          htmlEditorIsOpen ? (
+          openedEditor === 'html' ? (
             <Editor
               language="xml"
               displayName="HTML"
               value={html}
               setEditorState={setHtml}
             />
-          ) : cssEditorIsOpen ? (
+          ) : openedEditor === 'css' ? (
             <Editor
               language="css"
               displayName="CSS"
