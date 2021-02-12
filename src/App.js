@@ -4,9 +4,6 @@ import Button from './components/Button';
 import Editor from './components/Editor';
 
 function App() {
-  const [htmlEditorIsOpen, setHtmlEditorIsOpen] = useState(true);
-  const [cssEditorIsOpen, setCssEditorIsOpen] = useState(false);
-  const [jsEditorIsOpen, setJsEditorIsOpen] = useState(false);
 
   const [openedEditor, setOpenedEditor] = useState('html');
 
